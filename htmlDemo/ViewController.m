@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "AHHTMLView.h"
 
 @interface ViewController ()
 
@@ -16,7 +17,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    NSString *s = @"百度 http://www.baidu.com  谷歌:http://www.google.com";
+    AHHTMLView *htmlView = [[AHHTMLView alloc] initWithString:s font:[UIFont systemFontOfSize:14] textColor:[UIColor grayColor] maxWidth:200 clickBlock:^(NSString *value) {
+        NSLog(@"%@",value);
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:value delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alertView show];
+    }];
+    [self.view addSubview:htmlView];
+    htmlView.center = CGPointMake(self.view.center.x - 100, self.view.center.y);
 }
 
 - (void)didReceiveMemoryWarning {
